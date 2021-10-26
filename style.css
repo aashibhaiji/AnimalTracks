@@ -6,35 +6,77 @@
 
 
 header {
-    margin-top: 0px;
-    margin-bottom: 20px;
-    margin-left: 100px;
-    margin-right: 100px;
-    
+    background-color: rgb(236, 236, 236);
+    padding:0px; 
+    padding-bottom: 20px;
+
 }
 
 body {
     margin: 0;
-    padding: 50;
+    padding: 30px;
     font-family: 'Open Sans', cursive;
     font size: 16px;
     color: 171717
 }
+
+h1 {
+    padding-left: 9px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333
+    
+  }
+  
+  li {
+    display: inline;
+    float: left;
+  }
+  
+  li a {
+    display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none
+  }
+
+  /* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: #e6e6e6;
+    color: black;
+  }
+
+  /* Add a gray right border to all list items, except the last item (last-child) */
+li {
+    border-right: 1px solid #bbb;
+  }
+  
+  li:last-child {
+    border-right: none;
+  }
+
+  
+
+
 div {
     background-color: white;
   }
+
 main {
-    margin-top: 20px;
-    margin-bottom: 50px;
-    margin-left: 100px;
-    margin-right: 100px;
+    
 }
 
 footer {
-    margin-top: 0px;
-    margin-bottom: 50px;
-    margin-left: 100px;
-    margin-right: 100px;
+   background-color: rgb(236, 236, 236); 
+   padding-bottom: 6px;
+   padding-top: 6px;
+   text-align: center;
 }
 
   .row {
