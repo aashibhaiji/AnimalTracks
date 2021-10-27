@@ -90,8 +90,8 @@ footer {
   
   /* Create two equal columns that sits next to each other */
   .column {
-    flex: 33%;
-    max-width: 100%
+    flex: 25%;
+    max-width: 22%
     padding: 0 4px;
   }
   
@@ -102,12 +102,19 @@ footer {
     vertical-align: middle;
     width: 100%;
   }
-  
+   /* Responsive layout - makes a two column-layout instead of four columns */
+   @media screen and (max-width: 1000px) {
+    .column {
+      flex: 33%;
+      max-width: 33%;
+    }
+  }
+
   /* Responsive layout - makes a two column-layout instead of four columns */
   @media screen and (max-width: 800px) {
     .column {
       flex: 50%;
-      max-width: 100%;
+      max-width: 45%;
     }
   }
   
