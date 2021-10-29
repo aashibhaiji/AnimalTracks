@@ -1,0 +1,665 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Design Critique</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 70px;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="dc7d1168-f1f6-4287-b11f-6a7d5f15ca0c" class="page sans"><header><img class="page-cover-image" src="Design%20Critique%20dc3ec020e9df4000bf39af5b80da14ad/Screenshot_2021-10-29_at_8.04.35_AM.png" style="object-position:center 12.060000000000004%"/><h1 class="page-title">Design Critique</h1></header><div class="page-body"><h1 id="967f6fd1-22c7-4766-beeb-a0e70ede5a6b" class="">Chosen Visualization : Laughing OnLine, by Pudding</h1><figure id="b4e24800-eb71-4769-a5b3-87451ec79bd7"><a href="https://pudding.cool/2019/10/laugh/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Laughing OnLine</div><div class="bookmark-description">Pick a laugh. Not familiar? Skip it! Unamused, not smiling; perhaps even feeling spiteful. Neutral. Used as filler or to be nice. No physical response. A single breath of air exits the mouth, a possible smile forms. Visibly amused. Puffs of air released, slight body gyration.</div></div><div class="bookmark-href"><img src="https://pudding.cool/favicon.ico" class="icon bookmark-icon"/>https://pudding.cool/2019/10/laugh/</div></div><img src="https://pudding.cool/2019/10/laugh/assets/social/social-facebook.png" class="bookmark-image"/></a></figure><p id="d1a694b1-5a88-48bd-8c75-209f19c33581" class="">Laughter is complex and in real life it can be harder to decode it online. This visualization is a series that takes a closer look at the usage, evolution, and perception of the digital laugh published on Pudding done by Russel Goldenberg, Kishan Sheth, Caitlyn Ralphand Jan Diem</p><p id="5da9dffc-f196-4abe-af6c-b47b4dfa5f4b" class="">
+</p><h1 id="0c031907-eff8-4bcc-ab72-50fa477e62e0" class="">Analysis from a Creator Perspective</h1><hr id="4ff15b52-c097-4350-aeb2-654700591859"/><h3 id="88f54595-d82b-41d8-9348-82f3accff883" class="">1. Pragmatic</h3><p id="91efd536-2e9d-42d9-bf2b-7fa54344c1d9" class="">(Context and Effectiveness)</p><p id="e0005425-710c-43e5-9dac-b6764e85e9ac" class=""><strong><mark class="highlight-pink">Purpose and Objective</mark></strong></p><p id="cb4be235-b0b1-4471-bd1d-7ffafd2bd2bc" class="">The purpose of the visualisation is to look at the grammar and visual cues that express laughter in the evolving online world. The visualisation could help get a clearer picture to distinguish fake from real laughter as expressed through words. 
+
+<strong><mark class="highlight-pink">Audience</mark></strong></p><p id="9f3fe95a-c54e-41cd-9c0e-25999619ab9a" class="">This visualisation could be made for gen-z, the people of the internet. <strong><mark class="highlight-pink">
+</mark></strong></p><p id="b1af87e1-37c5-4521-bb33-b534e0c36326" class=""><mark class="highlight-pink"><strong>Style of Visualisation</strong></mark></p><p id="24662061-7963-4078-90e3-6e52cc795de3" class="">It is an exploratory narrative that measures the funny index of a laugh, the evolution of lol and how the internet has evolved in terms of usage of laughter words.</p><p id="a2c15993-f9a8-4cde-98a9-df7b71a72aaa" class="">
+</p><h3 id="66c7232e-817e-40c8-ad34-f1528eef7975" class="">2. Semantic</h3><p id="b3b308b7-4af4-45cd-82b8-6706e6081ee4" class="">(Meaning and Truth)</p><p id="f37b588a-448d-4260-842e-e20b1e9cf609" class="block-color-pink"><strong>What Does this Data Mean - The Visualization</strong></p><p id="a4f94bce-3492-4622-8f7b-44dec8295a3f" class="">The visualization answers 3 main question on laughter lingo. It starts with engaging the audience to put in their votes on picking a laughter word and rating it according to how funny they find it. This allows the audience to be actively engaged in the visualisation. It next talks about how the laughter word &#x27;lol&#x27; evolved using a simple line chart and comparing it to other used laughter words. The insights from the chart have been written below the chart which also include some additional context, facts and data. Next they visualise the number of times a laugh expression has been shared on the internet by using a tree map and interactive hover. They also mention that the words &#x27;lool&#x27; and &#x27;lol&#x27; were counted under the same data column. The next chart gives an insight on the way the words are typed - lowercase vs uppercase usage in text.
+</p><p id="4ddb5000-d16b-42d3-b919-8e1ae73d1306" class="block-color-pink"><strong>Questions the visualisation is it trying to answer </strong></p><ul id="970b0f76-1e74-477d-b545-748a8d305bbd" class="bulleted-list"><li style="list-style-type:disc">How funny is laughter lingo?</li></ul><ul id="62f90ab0-35fd-45e0-8f12-a2099cddee81" class="bulleted-list"><li style="list-style-type:disc">How people perceive laughter lingo?</li></ul><ul id="19f31672-5dcf-48a1-93bc-0382eb3b6ca3" class="bulleted-list"><li style="list-style-type:disc">When did laughter lingo come into our vocabulary?</li></ul><ul id="5fdc05e3-6ddc-400f-9c8d-0724b91dc827" class="bulleted-list"><li style="list-style-type:disc">How did the usage of laughter lingo evolve over the years?</li></ul><ul id="128f16e4-9541-4fdc-a63f-6e16479b0dac" class="bulleted-list"><li style="list-style-type:disc">What other lingo represents laughter?</li></ul><ul id="64761f43-e161-4f61-a256-748c73c7bf15" class="bulleted-list"><li style="list-style-type:disc">What acronym do people use while laughing?</li></ul><ul id="c87c0650-80c8-4acb-8cfb-147ebc1b71a6" class="bulleted-list"><li style="list-style-type:disc">Does changing the case of the lingo affect the degre of funnyness?</li></ul><p id="6356574a-b7ec-4684-8004-fa5b8a612daf" class="">
+</p><h3 id="94b23ac6-7019-440f-9ea0-2d1c42b9188b" class="">3. Syntax</h3><p id="d44e5069-5afe-4f41-b915-23eafd4cf18a" class=""><strong><mark class="highlight-pink">Interaction and Narrative Design </mark></strong></p><p id="da8804eb-934a-4084-a09f-38a45cafe4e1" class="">The primary interaction is a long page scroll. The visualisation starts with talking about the structure first - the topics the article covers, which gives a clear picture of narrative. The first interactive slider is great to get the audience engaged and interested in the data and make them feel like they are a part of the dataset.</p><p id="a3386638-c406-438c-94a4-e4466774bfd0" class="block-color-pink"><strong>Raw Data -</strong></p><p id="4c09afa6-0ad8-44cb-a322-80825e91a92a" class="">Text</p><p id="9d129ebd-b503-4f36-9ebc-070595824dbd" class="block-color-pink"><strong>Input Data - </strong></p><p id="c8e98f43-d31f-487c-827f-c7b1fc496faf" class="">Laugh Lingo, Time, Percentage, Votes, </p><p id="ae4a44ef-4a9d-4660-8d8c-aba8d672df14" class="block-color-pink"><strong>Data Transform - </strong></p><p id="37a60682-8d36-44da-92cd-dca7da09353b" class="">Funniness of laughter lingo, capitalisation of laughter lingo, number of shares, </p><p id="ec612463-256a-470c-ac41-6b057ec0879d" class="">
+</p><p id="cd7c4772-7327-417d-ac19-7e94014fa4f9" class="">
+</p><p id="6a4d550a-fd02-473c-8a46-5486c85e4200" class=""><strong><mark class="highlight-pink">View 1 - </mark></strong></p><figure id="dc3ec020-e9df-4000-bf39-af5b80da14ad" class="image"><a href="Design%20Critique%20dc3ec020e9df4000bf39af5b80da14ad/Screenshot_2021-10-29_at_8.36.03_AM.png"><img style="width:2040px" src="Design%20Critique%20dc3ec020e9df4000bf39af5b80da14ad/Screenshot_2021-10-29_at_8.36.03_AM.png"/></a></figure><p id="aba2de04-788a-4ebd-a654-68e5268ba16b" class=""><strong>Mark :</strong> Rule</p><p id="c20d00d7-6854-4a4c-9c0c-64b7fd6527cb" class=""><strong>Layout :</strong> Cartesian<div class="indented"><p id="ebb8280d-95ba-485b-99cb-4467725c311e" class=""><strong>Encoding :</strong>
+Position X : Degree of funniness</p><p id="758cca2a-e90a-445d-88f8-28cbcb5e2bd7" class="">
+</p></div></p><p id="27f466d4-12e8-4420-961a-128e5514d6fc" class=""><strong><mark class="highlight-pink">View 2 - </mark></strong></p><figure id="1f3ccfe4-5221-4314-9d45-b08bcdf6ae11" class="image"><a href="Design%20Critique%20dc3ec020e9df4000bf39af5b80da14ad/Screenshot_2021-10-29_at_8.36.20_AM.png"><img style="width:2040px" src="Design%20Critique%20dc3ec020e9df4000bf39af5b80da14ad/Screenshot_2021-10-29_at_8.36.20_AM.png"/></a></figure><p id="639bd558-370d-48c7-bb33-dc19a40278f9" class=""><strong>Mark :</strong> Area Chart</p><p id="2cb0c4a2-60fd-4148-a835-b93d9c4ba90e" class=""><strong>Layout :</strong> Cartesian<div class="indented"><p id="2fa6848b-cc01-4b5d-adc1-e2d5415f6639" class=""><strong>Encoding :</strong>
+Position X : Time</p><p id="4ebc2250-e011-411d-b16b-0194b63e53da" class="">Position Y : Number of Votes
+X Axis label only</p><p id="1d9b27b6-c3bc-404a-933f-2fbd4a73694f" class="">
+</p></div></p><p id="216fb51b-a088-4ae3-9132-855665d1c3ce" class=""><strong><mark class="highlight-pink">View 3 - </mark></strong></p><figure id="54d6e1d5-4063-4699-850e-132085a746f4" class="image"><a href="Design%20Critique%20dc3ec020e9df4000bf39af5b80da14ad/Screenshot_2021-10-29_at_8.37.57_AM.png"><img style="width:2590px" src="Design%20Critique%20dc3ec020e9df4000bf39af5b80da14ad/Screenshot_2021-10-29_at_8.37.57_AM.png"/></a></figure><p id="e7a21b16-d3a8-4eee-b6b2-a03a2b01e756" class=""><strong>Mark :</strong> Line chart</p><p id="9045f3a5-9c54-44c7-a5b9-5289eb0a6873" class=""><strong>Layout :</strong> Cartesian<div class="indented"><p id="9e8f5242-89e5-406f-80ce-eb044bb599ab" class=""><strong>Encoding :</strong>
+Position X : Year</p><p id="f238bd65-c6c5-4da6-9d5e-a22f645ba123" class="">Position Y : Percentage of laughs
+X and Y Axis label only</p><p id="d72237cb-c424-49b7-91b9-c6688b52a009" class="">
+</p></div></p><p id="574e73f9-2dc4-49d6-92e1-b51fbd4baf2f" class=""><strong><mark class="highlight-pink">View 4 - </mark></strong></p><figure id="167bfe73-9f95-42a2-8e06-265af39fb0d0" class="image"><a href="Design%20Critique%20dc3ec020e9df4000bf39af5b80da14ad/Screenshot_2021-10-29_at_8.38.46_AM.png"><img style="width:1480px" src="Design%20Critique%20dc3ec020e9df4000bf39af5b80da14ad/Screenshot_2021-10-29_at_8.38.46_AM.png"/></a></figure><p id="20d6b95b-3a24-4b7d-a45d-0b1bec1df1da" class=""><strong>Mark :</strong> TreeMap</p><p id="a75ee767-48cb-4729-89f8-cbb3ff38de95" class="">
+</p><p id="1b74aa29-66df-44a1-b2be-144c6d30947a" class=""><strong><mark class="highlight-pink">View 5 - </mark></strong></p><figure id="0cbc0fb7-ff7c-43f6-a23c-3c873a1389d6" class="image"><a href="Design%20Critique%20dc3ec020e9df4000bf39af5b80da14ad/Screenshot_2021-10-29_at_8.40.47_AM.png"><img style="width:1938px" src="Design%20Critique%20dc3ec020e9df4000bf39af5b80da14ad/Screenshot_2021-10-29_at_8.40.47_AM.png"/></a></figure><p id="e221dc85-077a-40ed-b58d-b73366e91747" class=""><strong>Mark :</strong> Horizontal Stacked Bar Chart with an Independent Variable on Y</p><p id="090dd4f2-27fe-4d3d-962e-e5f2fe86f793" class="">Layout : Cartesian</p><p id="21640a9f-96d0-4c87-8eae-c103408c3ee2" class=""><strong>Encoding : </strong></p><p id="7a736286-d8e1-4b10-ac07-af18aa289c1e" class="">Position X : Lowercase, Uppercase, </p><p id="d208c3d8-caed-4ccd-80ea-5058e65d3c97" class="">Position Y : Number of Shares</p><p id="c902f910-39cb-46aa-9c65-624618837a9e" class="">
+</p><p id="6e5c1d5d-4c5b-4930-ad24-f30d82e82c24" class=""><strong><mark class="highlight-pink">Aesthetic and Quality of Design</mark></strong></p><p id="7449abd6-9cb3-4205-8b50-ed78aa6c331d" class="">The use of fun colours, emojis and interactive elements at each chart makes the narrative interesting and keeps the user engaged. The facts are well represented and straightforward with filters that allow you to view the data- the way you want to. </p><h1 id="1f5fb351-dcab-409e-9302-1060ce9b2873" class="">Analysis from a User / Audience Perspective</h1><hr id="d34032d5-68c9-4684-866c-8ce9a59790c9"/><h3 id="85fcefa9-a89d-4952-a663-53505b0f0859" class="">1. Pragmatic</h3><p id="c9186457-8b93-46b3-be69-9da7d8d61e28" class="">(Context and Effectiveness)</p><p id="e9667b1b-e243-40f5-9fb8-795f310dca77" class="">The visualisation is fun, effective and simple. The use of emojis and bright colours conveys the overall mood and language of the visualisation. The charts and graphs are modified to match the theme of the narrative and are fun and interactive. The visualisation allows just enough exploration for the user to read the data.</p><h3 id="db4abbea-4d91-4b77-bdda-38d6ae53209b" class="">2. Semantic</h3><p id="7b6e1622-1bbb-4f82-b19c-f7c3aab76ab0" class=""><strong><mark class="highlight-pink">Takeaway from the Narrative</mark></strong></p><p id="d19503fa-28c8-4551-baf6-ab0fa4280072" class="">It was insightful to look at the way laughter is perceived by different people and the way it is expressed. The way they portray the rise of the laughter lingo is more like an evolution and got me thinking if it&#x27;s fair to compare laughter to real life.</p><h3 id="2b1f8f3e-a47c-447a-9eda-9fb8398d495d" class="">3. Syntax</h3><p id="ec7baa32-fdea-4953-a92f-867937dceec8" class=""><strong><mark class="highlight-pink">At a Glance, a Low Level Perception - </mark></strong></p><p id="f2b2ed42-0ea2-4f25-8990-1a2539a8d195" class="">Any person who spends time on the internet would not be surprised by the representation of the lingo. While the representation has been done well, capitalisation of words and length of the words might affect the way the &#x27;funniness&#x27; is perceived. </p><p id="6841ceb0-d0c8-4652-b6b9-ddb70b17d92a" class="">
+</p></div></article></body></html>
