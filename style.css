@@ -5,31 +5,56 @@
 
 
 
+
+
 header {
-    background-color: rgb(236, 236, 236);
-    padding:0px; 
-    padding-bottom: 20px;
-    text-align: center
-    
+  margin: 0%;
+  text-align:center;
+  text-align-last: center;
+  font-family: nunito sans, sans-serif;
+
+
 }
 
-body {
-    margin: 0;
-    padding: 30px;
-    font-family: 'Nunito Sans', sans-serif; 
-    font size: 18px;
-    font-kerning: normal;
-    color: 373737
-    text-align> center
+body{
+  margin: 100px 80px;
+  text-align: center;
+  font-family: nunito sans, sans-serif;
+  font-size: 18 px;
+  font-kerning: normal;
+
 }
 
 h1 {
-    padding-left: 9px;
+    padding-left: 0px;
 }
 
+h3 {
+  text-align: center;
+  font-size: 30px;
+  font-kerning: normal;
 
-.flex-container{
+}
+
+h5{
+  text-align: center;
+  font-size: 18px;
+  font-kerning: normal;
+
+
+}
+
+p {
+  max-width: 100ch;
+  text-align: center;
+  margin: 10px 200px;
+  font-size: 18 px;
+
+}
+
   
+.flex-container{
+
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -38,13 +63,40 @@ h1 {
   
 }
 
-  
-ul {
+
+.card1{
+  width: 800px;
+  height: auto; 
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0);
+  margin: 5px;
+  text-align: center;
+
+}
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 20px;
+  }
+
+  .grid-item {
+    height: 180px;
+    width: fit-content;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0);
+    border: 0.2px rgba(240, 240, 240, 10) solid;
+    margin: 5px;
+    text-align: center;
+  }
+
+  ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333  
+    background-color: #fff 
+ 
   }
   
   li {
@@ -54,11 +106,23 @@ ul {
   
   
   li a {
+  float:left;
+  color: #000;
+  text-align:center;
+  padding: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  margin: 5px;
+  border-radius: 5px;
   display: block;
-  color: white;
+  /* display: block;
+  color: rgb(34, 34, 34);
   text-align: center;
   padding: 14px 20px;
   text-decoration: none
+  border-radius: 5px; */
+
+  
   }
 
   /* Change the link color to #111 (black) on hover */
@@ -67,6 +131,52 @@ li a:hover {
     color: black;
     transition: 0.8s; ease-in-out
   }
+
+  nav{
+  overflow: hidden;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 10px;
+  }
+
+/* ul {
+  float:left;
+  color: rgb(0, 0, 0);
+  text-align:center;
+  padding: 10px;
+  text-decoration: none;
+  font-size: 14px;
+  margin: 10px;
+  border-radius: 10px;
+  display: block;
+  }
+  
+  li {
+    display: inline;
+    float: left;
+  }
+  
+  
+  li a {
+    float:left;
+    color: rgb(0, 0, 0);
+    text-align:center;
+    padding: 9px;
+    text-decoration: none;
+    font-size: 14px;
+    margin: 5px;
+    border-radius: 10px;
+    display: block;
+  }
+
+  /* Change the link color to #111 (black) on hover */
+li a:hover {
+  background-color: rgb(235, 235, 235);
+  color: rgb(0, 0, 0);
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+  } */
 
   /* Add a gray right border to all list items, except the last item (last-child) */
 li {
@@ -79,7 +189,6 @@ li {
 
   
 
-
 div {
     background-color: white;
   }
@@ -89,7 +198,7 @@ main {
 }
 
 footer {
-   background-color: rgb(236, 236, 236); 
+   background-color: rgb(255, 255, 255); 
    padding-bottom: 6px;
    padding-top: 6px;
    text-align: center;
@@ -147,3 +256,8 @@ footer {
       max-width: 100%;
     }
   }
+
+  /* footer {
+    text-align: center;
+    margin:5px 100px;
+  } */
